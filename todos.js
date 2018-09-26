@@ -64,7 +64,31 @@ var handlers = {
 	displayTodos: function(){
 	todoList.displayToDos();
 },
+	addToDo: function(){
+		var addTodoTextInput = document.getElementById('addTodoTextInput');
+		todoList.addToDo(addTodoTextInput.value);
+		addTodoTextInput.value = '';
+	},
+	changeToDo: function() {
+		var changeToDoPosition = document.getElementById('changeTodoPositionInput');
+		var changeToDoTextInput = document.getElementById('changeTodoTextInput');
+		todoList.changeToDo(changeToDoPosition.valueAsNumber, changeToDoTextInput.value);
+		changeTodoPositionInput.value = '';
+		changeTodoTextInput.value = '';
+
+	},
+	deleteToDo: function() {
+		var deleteToDoPositionInput = document.getElementById('deleteTodoPositionInput');
+		todoList.deleteToDo(deleteToDoPositionInput.valueAsNumber);
+		deleteToDoPositionInput.value = '';
+	},
+	toggleToDo: function() {
+		var toggleToDoPosition = document.getElementById('toggleTodoPositionInput')
+		todoList.toggleCompleted(toggleToDoPosition.valueAsNumber);
+		toggleToDoPosition.value = '';
+	},
 	toggleAll: function(){
 	todoList.toggleAll();
-	}
+	},
+
 };

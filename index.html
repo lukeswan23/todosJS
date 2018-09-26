@@ -6,8 +6,28 @@
 
 <body>
 	<h1>Your Todo List! </h1>
-	<button onclick="handlers.displayTodos()">Display Todos</button>
-	<button onclick="handlers.toggleAll()">Toggle All</button>
+	<div>
+		<button onclick="handlers.displayTodos()">Display Todos</button>
+		<button onclick="handlers.toggleAll()">Toggle All</button>
+	</div>
+	<div>
+		<button onclick="handlers.addToDo()">Add Todo</button>
+		<input id="addTodoTextInput" type="text" name="">
+	</div>
+
+	<div>
+		<button onclick="handlers.changeToDo()">Change Todo</button>
+		<input id="changeTodoPositionInput" type="number" name="">
+		<input id="changeTodoTextInput" type="text" name="">
+	</div>
+	<div>
+		<button onclick="handlers.deleteToDo()">Delete</button>
+		<input id="deleteTodoPositionInput" type="number" name="">
+	</div>
+	<div>
+		<button onclick="handlers.toggleToDo()">Toggle Todo</button>
+		<input id="toggleTodoPositionInput" type="number" name="">
+	</div>
 	
 	<script src="todos.js"></script>
 </body>
