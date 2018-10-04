@@ -54,10 +54,8 @@ var handlers = {
 		changeTodoTextInput.value = '';
 		view.displayTodos();
 	},
-	deleteToDo: function() {
-		var deleteToDoPositionInput = document.getElementById('deleteTodoPositionInput');
-		todoList.deleteToDo(deleteToDoPositionInput.valueAsNumber);
-		deleteToDoPositionInput.value = '';
+	deleteToDo: function(position) {
+		todoList.deleteToDo(position);
 		view.displayTodos();
 	},
 	toggleToDo: function() {
@@ -72,6 +70,7 @@ var handlers = {
 	},
 };
 
+//view object, only displays information to user...hence view
 var view = {
 	displayTodos: function() {
 		var toDosUl = document.querySelector('ul'); //resets the UL each time the function is run to prevent it from creating the UL every time.
@@ -87,9 +86,38 @@ var view = {
 				todoTextWithCompletion = '( ) ' + todo.todoText;
 			}
 
-			toDoLi.textContent = todoTextWithCompletion; //replaces line below
+			toDoLi.id= i; //each li element will have an id that has the todos position
+			toDoLi.textContent = todoTextWithCompletion; //replaces line below(line92)
+			toDoLi.appendChild(this.createDeleteButton());
 			// toDoLi.textContent = todoList.todos[i].todoText; //accessing todoLi object and setting text to value of i(current todo in array)'s todoText
 			toDosUl.appendChild(toDoLi);
-		}
-	}
-};
+			}
+		},
+		createDeleteButton: function() {
+			var deleteButton = document.createElement('button');
+			deleteButton.textContent = 'Delete';
+			deleteButton.className = 'deleteButton';
+			return deleteButton;
+		},
+		setUpEventListeners: function() {
+			var toDosUl = document.querySelector('ul'); 
+
+			toDosUl.addEventListener('click', function(event) {
+				console.log(event.target.parentNode.id);
+
+				//get element that was clicked 
+				var elementClicked = event.target;
+
+				//check if elementClicked is a delete button
+				if (elementClicked.className === 'deleteButton') {
+					//run handlers.deleteTodo(position) position that gets passed in as a string, so we parseInt
+					handlers.deleteToDo(parseInt(elementClicked.parentNode.id));
+				}
+			});
+		},	
+	};
+
+	view.setUpEventListeners();
+
+
+
