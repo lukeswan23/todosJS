@@ -22,19 +22,35 @@ var todoList = {
 		var totalTodos = this.todos.length;
 		var completedTodos = 0;
 		//get number of completed todos
-		for (var i = 0; i < totalTodos; i++) 
-			if (this.todos[i].completed === true) { //if everything is true(completed), set it to false(not complete)
-				completedTodos++
+		this.todos.forEach(function(todo) {
+			if (todo.completed === true) {
+				completedTodos++;
 			}
+		});	
+
+		// 	//
+		// if (completedTodos === totalTodos) {
+		// 	this.todos.forEach(function(todo) {
+		// 		todo.completed = false;
+		// 	});
+
+		// 	//case 2: else make everything true
+		// } else {
+		// 	this.todos.forEach(function(todo) {
+		// 		todo.completed = true;
+		// 	});
+		// }
+
+
+		this.todos.forEach(function(todo) {
 			//case 1: if everything's true, make everything false
-		if (completedTodos === totalTodos) {
-			for (var i = 0; i < totalTodos; i++)
-				this.todos[i].completed = false
-			//case 2: else make everything true
-		} else {
-			for (var i = 0; i < totalTodos; i++)
-				this.todos[i].completed = true;
-		}
+			if (completedTodos === totalTodos) {
+				todo.completed = false;
+				//case 2: else make everything true
+			} else {
+				todo.completed = true;
+			}
+		});
 	},
 };
 
@@ -75,9 +91,25 @@ var view = {
 	displayTodos: function() {
 		var toDosUl = document.querySelector('ul'); //resets the UL each time the function is run to prevent it from creating the UL every time.
 		toDosUl.innerHTML = ''; //prevents extra LI's being created by starting at 0, e.g if there are already 3 items on the page and we run the function again those 3 items won't be added AGAIN
-		for (var i = 0; i < todoList.todos.length; i++) { //creates list item for each item in the todo list array32wq
+		// for (var i = 0; i < todoList.todos.length; i++) { //creates list item for each item in the todo list array32wq
+		// 	var toDoLi = document.createElement('li');
+		// 	var todo = todoList.todos[i];
+		// 	var todoTextWithCompletion = '';
+
+		// 	if (todo.completed === true) {
+		// 		todoTextWithCompletion = '(x) ' + todo.todoText;
+		// 	} else {
+		// 		todoTextWithCompletion = '( ) ' + todo.todoText;
+		// 	}
+
+		// 	toDoLi.id= i; //each li element will have an id that has the todos position
+		// 	toDoLi.textContent = todoTextWithCompletion; //replaces line below(line92)
+		// 	toDoLi.appendChild(this.createDeleteButton());
+		// 	// toDoLi.textContent = todoList.todos[i].todoText; //accessing todoLi object and setting text to value of i(current todo in array)'s todoText
+		// 	toDosUl.appendChild(toDoLi);
+		// 	}
+		todoList.todos.forEach(function(todo, position) {
 			var toDoLi = document.createElement('li');
-			var todo = todoList.todos[i];
 			var todoTextWithCompletion = '';
 
 			if (todo.completed === true) {
@@ -86,12 +118,11 @@ var view = {
 				todoTextWithCompletion = '( ) ' + todo.todoText;
 			}
 
-			toDoLi.id= i; //each li element will have an id that has the todos position
+			toDoLi.id= position; //each li element will have an id that has the todos position
 			toDoLi.textContent = todoTextWithCompletion; //replaces line below(line92)
 			toDoLi.appendChild(this.createDeleteButton());
-			// toDoLi.textContent = todoList.todos[i].todoText; //accessing todoLi object and setting text to value of i(current todo in array)'s todoText
 			toDosUl.appendChild(toDoLi);
-			}
+			}, this);
 		},
 		createDeleteButton: function() {
 			var deleteButton = document.createElement('button');
