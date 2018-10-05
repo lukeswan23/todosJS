@@ -12,7 +12,7 @@
 	</div>
 	<div>
 		<button onclick="handlers.addToDo()">Add Todo</button>
-		<input id="addTodoTextInput" type="text" name="">
+		<input onkeypress="return handlers.addToDoEnter(event)" id="addTodoTextInput" type="text" name="">
 	</div>
 
 	<div>
@@ -22,7 +22,7 @@
 	</div>
 	<div>
 		<button onclick="handlers.toggleToDo()">Toggle Todo</button>
-		<input id="toggleTodoPositionInput" type="number" name="">
+		<input  onkeypress="return handlers.toggleToDoEnter(event)" id="toggleTodoPositionInput" type="number" name="">
 	</div>
 
 	<div>

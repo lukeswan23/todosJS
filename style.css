@@ -4,21 +4,24 @@ body {
 
 input{
 	background-color: cornsilk;
+	padding-left: 0px;
+
 }
 
 h1{
 	text-align: center;
 	font-family: cursive;
 	text-decoration: underline;
+	background: linear-gradient(to right, #30CFD0 0%, #330867 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
  
-
 }
 
 h1:hover {
 	transition: all .5s ease-in-out; 
 	transform: rotate(1turn) scale(1.5);
 	transition-delay: 250ms;
-
-
-
 }
+
+
